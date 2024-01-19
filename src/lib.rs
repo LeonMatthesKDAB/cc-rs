@@ -2573,7 +2573,11 @@ impl Build {
         // interpretation at all, just pass it on through. This'll hopefully get
         // us to support spaces-in-paths.
         if Path::new(&tool).exists() {
-            return Some((tool, None, Vec::new()));
+            return Some((
+                tool,
+                Self::rustc_wrapper_fallback(),
+                Vec::new(),
+            ));
         }
 
         // Ok now we want to handle a couple of scenarios. We'll assume from
